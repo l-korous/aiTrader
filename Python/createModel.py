@@ -6,7 +6,7 @@ iAction = vars[1]
 iWithVolume = vars[6]
 
 import os
-os.cmd("fixEncoding.bat")
+os.system("fixEncoding.bat")
 #os.environ["CUDA_VISIBLE_DEVICES"]="-1"   
 
 import keras.backend as K
