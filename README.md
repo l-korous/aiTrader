@@ -46,7 +46,7 @@
 		* as you can guess, the numbers represent the iBarsFuture, iBarsPast, iPipsToGain values, in what follows the string **H1-BUY-EURUSD-60-10-100-NoVolume-Training** will be referred to as **CASE_IDENTIFIER**
 		* if you set iDatasetType to LkTest, the files will have 'test' prepended to them. Of course standard ML practices like ~ 80 / 20 distribution between training and test data should be followed
 			* since we will want to have some validation as well, I recommend not setting the training / test data to the most recent. Instead maybe use last 3 months up to today for validation, 3-6 months before that for testing, and 2-3 years before that for training
-	9. I recommend inspecting the data:
+	9. You will need to do steps 7 and 8 twice - once for training data, once for test data (you should be only changing the iDatasetType, and the time Date on the Settings tab). After that, I recommend inspecting the data:
 		* the variables are just as many past returns (per timeframe) as iBarsPast specified. Plus that many relative volumes - as a large array per timeframe (**this is probably something that can be improved for better results**)
 		* the results (labels) are just the labels. For LkBuy, positive is represented by 1, for LkSell, positive is represented by 2, for LkBuyAndSell buy label is 1, sell label is 2
 5. Training of the model
@@ -72,9 +72,10 @@
 	5. Last piece of the chain here is a super simple web server (written in python) that you need to run by (in the command line):
 		* python runServer.py H1-BUY-EURUSD-60-10-100-NoVolume (in generic terms python runServer.py **CASE_IDENTIFIER**)
 	6. When you have all the above, you can actually run the aiTrader MT5 program via the Strategy Tester in MT5. It has only these parameters (inputs):
-		* **CASE_IDENTIFIER**: obvious, see above if not
-		* **iMaxSpread**: same meaning as for trainingDataFactory; why this is not a part of CASE_IDENTIFIER is that in theory you might want to train ML model with different value than when you trade
-		* **slTpRatio**: this is ratio between Stop Loss and Take Profit (for both, google if unsure; in short these are price levels that you set when you open your trade for the trade to be automatically closed when the current price hits those levels - and one is where you experience loss, another is when you take profit)
+		1. **CASE_IDENTIFIER**: obvious, see above if not
+		2. **iMaxSpread**: same meaning as for trainingDataFactory; why this is not a part of CASE_IDENTIFIER is that in theory you might want to train ML model with different value than when you trade
+		3. **iSlTpRatio**: this is ratio between Stop Loss and Take Profit (for both, google if unsure; in short these are price levels that you set when you open your trade for the trade to be automatically closed when the current price hits those levels - and one is where you experience loss, another is when you take profit)
+		4. **iThreshold**: this is passed to the web inference request. Goal is to only get inferences (predictions) of high quality. This threshold is used as follows: only if the prediction of any actionable outcome (Buy or Sell) is more than iThreshold higher than any other (in absolute terms), we take action
 7. That is it, you can of course actually let the setup from previous point trade on a demo / real account. But for that, two points:
 	* you can do that on your PC, sure. But that is really not recommended (your PC may crash etc.). And running on a server requires a bit more robust implementation if you plan to not lose money
 	* running this on a server also requires to get rid of the DLL and instead connecting directly to the web server - again here, this requires a server (e.g. in the cloud) running the flask server, and again - more robust, fail-safe implementation
