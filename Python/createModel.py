@@ -28,10 +28,12 @@ finalLayerShape = 3 if iAction == "BOTH" else 2
 barsCountMultiplier = 2 if iWithVolume == "WithVolume" else 1
 model = tf.keras.models.Sequential([
 	tf.keras.Input(shape=(barsCountMultiplier * iBarsPast,)),
-	tf.keras.layers.Dense(barsCountMultiplier * iBarsPast, activation='relu'),
-	tf.keras.layers.Dense(2 * barsCountMultiplier * iBarsPast, activation='relu'),
-	tf.keras.layers.Dense(barsCountMultiplier * iBarsPast, activation='relu'),
-	tf.keras.layers.Dense(int(0.5 * barsCountMultiplier * iBarsPast), activation='relu'),
+	tf.keras.layers.Dense(barsCountMultiplier * iBarsPast, activation='tanh'),
+    tf.keras.layers.Dropout(0.1),
+	tf.keras.layers.Dense(barsCountMultiplier * iBarsPast),
+    tf.keras.layers.Dropout(0.2),
+	tf.keras.layers.Dense(barsCountMultiplier * iBarsPast),
+    tf.keras.layers.Dropout(0.1),
 	tf.keras.layers.Dense(finalLayerShape)
 ])
 
