@@ -1,8 +1,9 @@
 # Intro
-* primary audience are ML 'people' who want to have a way to use ML for trading
+* primary audience are ML 'people' who want to have a way to use ML for trading, which is why only the file 
 * goal is to have an ML model that can do binary/ternary classification of current market situation (represented by past returns and relative volumes) into recommendation to buy, sell, or nothing based on training of past situations where the market moved by certain amount following a given market situation
 * it is an end-to-end framework how to get data, how to train the model, and how to plug the model into actual trading robot and see how it performs not just in ML terms, but on the market
 * GOAL IS NOT TO PROVIDE A PERFECT ML MODEL, that is not my expertise, so the model provided in createModel.py is as dumb as they come. This is also the main file that you are expected to fine-tune
+* high-level overview of the framework is at https://miro.com/app/board/o9J_l0jGBbI=/?invite_link_id=698428431464
 
 # How to read this
 * this all unfortunately works on Windows only, and it was tested only on Windows 10
