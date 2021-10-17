@@ -5,7 +5,7 @@
 * GOAL IS NOT TO PROVIDE A PERFECT ML MODEL, that is not my expertise, so the model provided in createModel.py is as dumb as they come. This is also the main file that you are expected to fine-tune
 
 # How to read this
-* this all unfortunately works on Windows only
+* this all unfortunately works on Windows only, and it was tested only on Windows 10
 * in what follows, I use my actual directory structure, including my username "lukas", and some other parts that are specific to my setup - I believe in all these places, it is obvious what applies to your setup
 * some actions are not explained in detail (e.g. 'compile the project'); if you are unsure how to proceed, drop me an email (after making some effort)
 
@@ -66,9 +66,11 @@
 		3. In the Navigator, open the project file aiTrader.mqproj and compile the project
 		4. When you do that, in MT5 Navigator, you will now see the 'Expert Advisor' (= MT5 program) called aiTrader
 	3. Then, you need to copy c:\Git\aiTrader\DLL\x64\Debug\webRequest.dll to c:\Windows\System32\ (or to any other place in your PATH)
-	4. Last piece of the chain here is a super simple web server (written in python) that you need to run by (in the command line):
+		* You need to have Windows 10 SDK installed (https://developer.microsoft.com/en-us/windows/downloads/windows-sdk/)
+		* You might need to compile this small library using Visual C++ using the provided .sln file if just using the pre-built one does not work (e.g. you have a different system)
+	5. Last piece of the chain here is a super simple web server (written in python) that you need to run by (in the command line):
 		* python runServer.py H1-BUY-EURUSD-60-10-100-NoVolume (in generic terms python runServer.py **CASE_IDENTIFIER**)
-	5. When you have all the above, you can actually run the aiTrader MT5 program via the Strategy Tester in MT5. It has only these parameters (inputs):
+	6. When you have all the above, you can actually run the aiTrader MT5 program via the Strategy Tester in MT5. It has only these parameters (inputs):
 		* **CASE_IDENTIFIER**: obvious, see above if not
 		* **iMaxSpread**: same meaning as for trainingDataFactory; why this is not a part of CASE_IDENTIFIER is that in theory you might want to train ML model with different value than when you trade
 		* **slTpRatio**: this is ratio between Stop Loss and Take Profit (for both, google if unsure; in short these are price levels that you set when you open your trade for the trade to be automatically closed when the current price hits those levels - and one is where you experience loss, another is when you take profit)
