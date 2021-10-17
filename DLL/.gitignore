@@ -1,0 +1,15 @@
+*.tlog
+*.pdb
+*.exp
+*.ilk
+*.lib
+*.log
+*.obj
+*.idb
+*.user
+*.db
+*.suo
+*.recipe
+*.map
+*.pch
+*FileListAbsolute.txt
