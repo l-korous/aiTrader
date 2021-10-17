@@ -1,4 +1,5 @@
-for /r %%v in (*.csv) do iconv --from-code=UTF-16LE --to-code=CP1250 -c "%%v" > "%%vx"
+for /r %%f in (*.csv) do (
+	if "%%~xf"==".csv" iconv --from-code=UTF-16LE --to-code=CP1250 -c "%%f" > "%%fx"
+)
 
 rm *.csv
-rm *.csvxx
