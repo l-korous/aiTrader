@@ -28,10 +28,6 @@ def home():
     threshold = float(request.json["threshold"])
     # print(threshold)
 
-    # Rescale to [-1, 1]
-    x_input = 2.*(x_input - np.min(x_input))/np.ptp(x_input) - 1
-    print(x_input)
-    
     prediction = model(x_input)
     print(prediction)
     

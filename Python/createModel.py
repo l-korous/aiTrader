@@ -20,9 +20,11 @@ y_train = np.genfromtxt("res-" + CASE_IDENTIFIER + ".csvx", delimiter = ",")
 x_test = np.genfromtxt("testvars-" + CASE_IDENTIFIER + ".csvx", delimiter = ",")
 y_test = np.genfromtxt("testres-" + CASE_IDENTIFIER + ".csvx", delimiter = ",")
 
-# Rescale to [-1, 1]
-x_train = 2.*(x_train - np.min(x_train))/np.ptp(x_train) - 1
-x_test = 2.*(x_test - np.min(x_test))/np.ptp(x_test) - 1
+# TODO
+# Check data - pandas, matplotlib, seaborn for heatmaps, correlation
+# Confusion matrix
+# Make sure data are evenly distributed across labels - SMOTE, TSNE
+# Remove outliers
 
 finalLayerShape = 3 if iAction == "BOTH" else 2
 barsCountMultiplier = 2 if iWithVolume == "WithVolume" else 1
